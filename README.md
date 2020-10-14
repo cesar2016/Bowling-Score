@@ -1,5 +1,5 @@
 <p align='left'>
-    <img src='https://static.wixstatic.com/media/85087f_0d84cbeaeb824fca8f7ff18d7c9eaafd~mv2.png/v1/fill/w_160,h_30,al_c,q_85,usm_0.66_1.00_0.01/Logo_completo_Color_1PNG.webp' </img>
+    <img src='https://mail.google.com/mail/u/0?ui=2&ik=3bd32bbca4&attid=0.1&permmsgid=msg-a:r7261096307147802519&th=17527ff27cdbc2e6&view=fimg&sz=s0-l75-ft&attbid=ANGjdJ_0_2vF8TRDv26qIWEQvPL_X5ZgMlHqL-vePD8OEwqarEh3QUwqZqKMpncKy8S5Dz3MPpLSYCI91RgLXEeu5YzQErpexDOwlm7-_5oQam79HkK8fwZ-ezpHc44&disp=emb&realattid=ii_kg9mir200' </img>
 </p>
 
 # BOWLING SCORE
