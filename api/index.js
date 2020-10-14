@@ -22,9 +22,9 @@ const { conn } = require('./src/db.js');
 
 // Syncing all the models at once.
 conn.sync({ force: true }).then(() => {
-  server.listen(3005, () => {
+  server.listen(4000, () => {
     console.log('|||||||||||||||||||||');
-    console.log('| Listening at 3005 |');
+    console.log('| Listening at 4000 |');
     console.log('|||||||||||||||||||||'); // eslint-disable-line no-console
   });
 });

@@ -1,17 +1,16 @@
 const { Router } = require('express');
 // import all routers;
-const clientsRouter = require('./Clients.js');
-const ordersRouter = require('./Order.js');
-const toolsRouter = require('./Tools.js');
-const categoryRouter = require('./Category.js');
+const turnRouter = require('./Turn.js');
+const nameRouter = require('./Name.js');
+const resultRouter = require('./Result.js');
+
 
 
 const router = Router();
 
 
-router.use('/clients', clientsRouter);
-router.use('/orders', ordersRouter);
-router.use('/tools', toolsRouter);
-router.use('/category', categoryRouter);
+router.use('/turn', turnRouter);
+router.use('/name', nameRouter);
+router.use('/result', resultRouter); 
 
 module.exports = router;

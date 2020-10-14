@@ -2,9 +2,7 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
-const routes = require('./routes/index.js');
-
-const { Client } = require('./db.js');
+const routes = require('./routes/index.js'); 
 
 const server = express();
 
@@ -31,81 +29,7 @@ server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
   res.status(status).send(message);
 });
 
-///////// HARDCOD CLIENTES //////
-
-server.post('/registerhd', (req, res) => {
-
-const client1 = {
-  name: 'Cesar',
-  lastname: "Sanchez",
-  password: 1234
-}
-
-Client.create(client1)
-
-  const client2 = {
-    name: 'Facundo',
-    lastname: "Sadava",
-    password: 1234
-  }
-  
-Client.create(client2)
-
-const client3 = {
-  name: 'Alex',
-  lastname: "Velazquez",
-  password: 1234
-}
-
-Client.create(client3)
-
-  const client4 = {
-    name: 'Leonel',
-    lastname: "Messi",
-    password: 1234
-  }
-  
-Client.create(client4)
-
-const client5 = {
-  name: 'Sergio',
-  lastname: "Aguero",
-  password: 1234
-}
-
-Client.create(client5)
-
-  const client6 = {
-    name: 'Diego',
-    lastname: "Acosta",
-    password: 1234
-  }
-  
-Client.create(client6)
-
-const client7 = {
-  name: 'Andrea',
-  lastname: "Anderson",
-  password: 1234
-}
-
-Client.create(client7)
-
-  const client8 = {
-    name: 'Carola',
-    lastname: "Bianco",
-    password: 1234
-  }
-  
-Client.create(client8)
-
-
-
-   
-})
-
-
-
+ 
 
 module.exports = server;
 

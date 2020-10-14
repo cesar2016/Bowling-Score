@@ -6,7 +6,7 @@ const {
   DB_USER, DB_PASSWORD, DB_HOST,
 } = process.env;
 
-const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/mtools`, {
+const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/bolos`, {
   logging: false, // set to console.log to see the raw SQL queries
   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
 });
@@ -32,17 +32,10 @@ sequelize.models = Object.fromEntries(capsEntries);
 //        RELACIONES        |||
 //|||||||||||||||||||||||||||||
 
-const { Client, Tools, Order, Category } = sequelize.models;
+const { Turn, Result, Name} = sequelize.models;
 
-Client.hasMany(Order);
-Order.belongsTo(Client);
-
-Order.hasMany(Tools);
-Tools.belongsTo(Order);
-
-Tools.belongsTo(Category);
-
-
+Result.belongsTo(Turn); 
+Turn.belongsTo(Name);
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
   conn: sequelize,     // para importart la conexión { conn } = require('./db.js');

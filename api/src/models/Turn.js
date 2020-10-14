@@ -3,22 +3,22 @@ const { DataTypes } = require('sequelize');
 // Luego le injectamos la conexion a sequelize.
 module.exports = (sequelize) => {
   // defino el modelo
-  const Tools = sequelize.define('tools', {
-    name: {
+  const Turn = sequelize.define('turn', {    
+    shoot1: {
             type: DataTypes.STRING,
-            allowNull: true,
+            
         },
-    description: {
-            type: DataTypes.STRING,
-            allowNull: true,
-        },
-    stock: {
+    shoot2: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+       
     },
-    status: {
+    strike: {
       type: DataTypes.STRING,
-      allowNull: false,
+      
+    },
+    spare: {
+      type: DataTypes.STRING,
+       
     },
   });
 };
