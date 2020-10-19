@@ -243,8 +243,15 @@ server.get("/", (req, res, next) => {
 server.get("/reset", (req, res, next) => {
 
 	
-	Result.destroy({ truncate: {cascade: false} })
-	Turn.destroy({ truncate: {cascade: false} })
+	 
+	Turn.truncate({restartIdentity: true, cascade: true}).then(function(){
+			console.log('destroy all Turn');
+			 
+	})
+	Result.truncate({restartIdentity: true, cascade: true}).then(function(){
+			console.log('destroy all Result');
+			 
+	})
 	
 	res.send('RESETEO')
   });
