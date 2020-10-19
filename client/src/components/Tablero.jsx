@@ -1,38 +1,34 @@
 import React, { useState, useEffect  } from 'react';
 import { connect } from "react-redux";
-import { insertName, insertPoints, allPoitns, updateResult, allScore} from "../actions/index";
+// ES6 Modules or TypeScript
+import Swal from 'sweetalert2'
 
-import {
-    
+
+import { insertName, insertPoints, allPoitns, updateResult, allScore, reset} from "../actions/index";
+
+import {    
    Navbar,      
-   NavbarBrand, 
-   Nav, 
-   NavItem, 
-   NavLink,
-   Button,
-   Toast, 
-   ToastBody, 
-   ToastHeader,
+   NavbarBrand,     
+   Button,   
    Alert,
    Table,
-   Row, 
-   Form, 
-   FormGroup, 
-   Label,
+   Row,    
    Input,
    Col,
    InputGroupAddon,
-   InputGroup
+   InputGroup   
   } from 'reactstrap';
+   
   
+const shootsTurn = [] // Array que contiene los disparos para comprovara valores
+const Header = ({ insertName, date_user, insertPoints, date_points, all_points, allPoitns, updateResult, allScore, all_score, reset}) => {
 
-const Header = ({ insertName, date_user, insertPoints, date_points, all_points, allPoitns, updateResult, allScore, all_score}) => {
-
-  var namePlay = localStorage.getItem('name');
+  var namePlay = localStorage.getItem('name'); 
  
   useEffect(() => {    
     allPoitns();
     allScore();  
+    reset();
     },[])
 
   const [input, setInput] = useState({ namePlayer: "" });
@@ -58,7 +54,8 @@ const Header = ({ insertName, date_user, insertPoints, date_points, all_points, 
 
   const handleSubmit = (e) => {//////Setear Name
     e.preventDefault(); 
-    allScore();   
+    allScore(); 
+    
     insertName(input); //Function que inserta el nombre  
     localStorage.setItem('name', input.namePlayer);   
      
@@ -66,13 +63,84 @@ const Header = ({ insertName, date_user, insertPoints, date_points, all_points, 
   
   
   const handleSubmitP = (e) => {//////Meter puntos
-    e.preventDefault();   
+    e.preventDefault();       
+    allScore(); 
     
-     if(inputP.shoot > 10){
-      alert('Ups! ingrese un valor menor que 10')
-      return
 
-     }
+    if(all_points.length  == 10){
+    const turn = all_points.map((turns)=>{
+      return turns.id
+
+    }) 
+    const fin = turn.find(element => element == 10);
+    console.log('EL TURNOOOOOO ',fin)
+    if(fin){
+      Swal.fire({
+        title: 'THE END!!!',
+        text: 'El Juego termino, gracias por tu visita',
+        imageUrl: 'https://st2.depositphotos.com/3261171/6623/i/450/depositphotos_66237665-stock-photo-woman-holding-a-bowling-ball.jpg',
+        imageWidth: 400,
+        imageHeight: 200,
+        imageAlt: 'Custom image',
+      })
+      return
+    }
+  }
+     
+    
+    if(inputP.shoot > 10){
+      
+     Swal.fire({
+      icon: 'error',
+      title: 'Ups...!!!',
+      text: 'Debe ingresar un valor menor que 10',
+       
+    })
+     return
+    }
+    shootsTurn.push(inputP.shoot)      
+    console.log(shootsTurn)
+
+    
+    if(shootsTurn.length == 2){
+     
+      const sumaShots = parseInt(shootsTurn[0]) + parseInt(inputP.shoot)
+      //console.log('La SUma ',sumaShots)
+
+      if(sumaShots > 10){ 
+        
+       Swal.fire({
+        icon: 'error',
+        title: 'Ups...!!!',
+        text: 'Debes ingresar un numero que sumado al anterior sea igual a diez o menor a 10',
+         
+      })
+       //console.log("Te Borra el segundo deja primero", sumaShots)
+       shootsTurn.pop()
+       return
+        }        
+
+      if(sumaShots < 11){
+        shootsTurn.length = 0;
+      }    
+         
+    }
+
+    if(shootsTurn.length == 1 && parseInt(shootsTurn[0]) == 10){
+
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'STRIKE!!!',
+          showConfirmButton: false,
+          timer: 1000
+        })
+        
+        shootsTurn.length = 0;      
+      
+    }
+
+    
     
     if(all_points.length === undefined) {
 
@@ -125,24 +193,33 @@ const Header = ({ insertName, date_user, insertPoints, date_points, all_points, 
             allPoitns()
             allPoitns() 
         }
-
-
-         
        }  
+       
   };
+
+   function reiniciar() {
+    reset();
+    alert('RESETEADO')
+
+     
+   }
+  
 
   var sumadorScore = 0;
   return (
     <div className='container-fluid'>
       <div>
-        <Navbar color="light" light expand="md">
-          <NavbarBrand href="/">B O W L I N G</NavbarBrand>          
+        <Navbar color="danger" light expand="md">
+          <NavbarBrand href="/">B O W L I N G</NavbarBrand> 
+          <img src="https://lh3.googleusercontent.com/proxy/Fcgixrhn6H0qnOmpAu5ZnOLBVbri-rdEZSBk0bnW01GVHP7ZfShSEJ-P8wBTCB_3me3esVGOxPrXwUZ7i9EmF6IdDHECRKFn2b84DCld0fRuf0asNR5lsg" width="50" height="50" alt=""></img>           
         </Navbar>      
-      </div>  
+      </div>
+        
 
-
-      { namePlay ?<Alert id="title" color="primary">
-       <h3> WELCOMO THE GAME {namePlay} </h3>
+      { namePlay ?<Alert id="title" color="light">
+       <h4> WELCOMO THE GAME {namePlay.toUpperCase()} 
+        <pan> </pan> <img src="https://media.istockphoto.com/vectors/man-bowling-gamer-icon-vector-outline-illustration-vector-id1200653150?k=6&m=1200653150&s=170667a&w=0&h=gMdtn8F1poANbB-ozsdny2nq01vYY70AeE-p3FjYXnI=" width="30" height="30" alt=""></img>  
+       </h4>         
       </Alert>: null}
       { namePlay ?  <Table id="tablet" bordered dark>       
         <thead> 
@@ -164,6 +241,7 @@ const Header = ({ insertName, date_user, insertPoints, date_points, all_points, 
         <tbody>
 
         { all_points.length > 0 ? all_points.map((table)=>{
+          
           if(parseInt(table.shoot2) || parseInt(table.shoot2) == 0 ){
           sumadorScore += parseInt(table.shoot1) + parseInt(table.shoot2)  
           } 
@@ -178,11 +256,12 @@ const Header = ({ insertName, date_user, insertPoints, date_points, all_points, 
              <h3 align="center">{
              
              table.shoot2 === null ? table.shoot1
-             : global.strikes = parseInt(table.shoot1) + parseInt(table.shoot2)
-
-              
+             : global.strikes = parseInt(table.shoot1) + parseInt(table.shoot2)                     
              
              }</h3>
+
+
+              
           </td> 
             
 
@@ -195,7 +274,7 @@ const Header = ({ insertName, date_user, insertPoints, date_points, all_points, 
         <tfoot>
             <tr>
 
-              {all_score.length ? all_score.map((score)=>{
+              {all_score.length ? all_score.map((score)=>{                
 
                 if(score.resultTurn == 30 || score.resultTurn == 60 || score.resultTurn == 90
                   || score.resultTurn == 120 || score.resultTurn == 150 || score.resultTurn == 180
@@ -239,22 +318,24 @@ const Header = ({ insertName, date_user, insertPoints, date_points, all_points, 
          }          
              
         {namePlay ?
-        <Col id="formularioP" >
-        <h3>Insert Points Turn</h3>
+        <Col id="formularioP">
+        <h3>Insert Points Turn <Button onClick={reiniciar} color="light">Reiniciar DB</Button></h3>
         <form onSubmit={handleSubmitP}>
           <InputGroup>          
             <Input name='shoot' id="shoot" onChange={handleChangeP} required />
             <InputGroupAddon addonType="append">
-              <Button color="danger">Send</Button>
+              <Button color="primary">Send</Button>              
             </InputGroupAddon>
           </InputGroup>
         </form>
+        
         </Col>
         : null  
           }
-        <Col></Col>
-        
-      </Row>     
+        <Col></Col>        
+      </Row>
+            
+       
        
        
     </div>
@@ -268,7 +349,8 @@ return {
   insertPoints: (inputP) => dispatch(insertPoints(inputP)),
   allPoitns: () => dispatch(allPoitns()),
   updateResult: (globalID, inputP) => dispatch(updateResult(global.id, inputP)),
-  allScore: () => dispatch(allScore()) 
+  allScore: () => dispatch(allScore()),  
+  reset: () => dispatch(reset())
 }
 }
 

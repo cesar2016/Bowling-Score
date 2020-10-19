@@ -6,6 +6,7 @@ export const INSER_POINTS = "INSER_POINTS";
 export const ALL_POINTS = "ALL_POINTS";
 export const UPDATE_RESULT = "UPDATE_RESULT";
 export const ALL_SCORE = "ALL_SCORE";
+export const REINICIARDB = "REINICIARDB";
 
 
 export function infoMovie (apiKey, ciudad ) {          
@@ -64,6 +65,21 @@ export function allPoitns () {
           payload: data
         })
         //console.log("lOS PUNTOS DE LA DB ",data)
+      })
+  };
+    
+}
+export function reset() {  
+  console.log('llego el reset')           
+  return function(dispatch) {        
+    return axios.get(`http://localhost:4000/turn/reset`)
+      .then(result => result.data)
+      .then(data => {
+        dispatch({   
+          type: REINICIARDB,       
+          payload: data
+        })
+        console.log("RESET DE LA DB ",data)
       })
   };
     

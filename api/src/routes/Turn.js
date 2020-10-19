@@ -5,7 +5,6 @@ const { Op } = require('sequelize');
 ////////////////////////////
 //    		/TURN	////
 ////////////////////////////
-
  
 
 server.post('/insert', (req, res) => {/// Inser de los puntos del turno
@@ -227,8 +226,6 @@ server.post('/updatePoint/:id', (req, res) => {
 		
 })
 
-
-
 server.get("/", (req, res, next) => {
 	Turn.findAll({
 	  order: [["id", "ASC"]]	   
@@ -242,7 +239,16 @@ server.get("/", (req, res, next) => {
 	  .catch((error) => next(error));
   });
 
-//////////////////////////////////////////////////////
+/////////////////////REINICIANDO DB/////////////////////////
+server.get("/reset", (req, res, next) => {
+
+	
+	Result.destroy({ truncate: {cascade: false} })
+	Turn.destroy({ truncate: {cascade: false} })
+	
+	res.send('RESETEO')
+  });
+
 
   
 
