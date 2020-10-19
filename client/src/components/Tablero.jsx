@@ -236,7 +236,7 @@ const Header = ({ insertName, date_user, insertPoints, date_points, all_points, 
         
 
       { namePlay ?<Alert id="title" color="light">
-       <h4> WELCOMO THE GAME {namePlay.toUpperCase()} 
+       <h4> WELCOME TO THE GAME, {namePlay.toUpperCase()} 
         <pan> </pan> <img src="https://media.istockphoto.com/vectors/man-bowling-gamer-icon-vector-outline-illustration-vector-id1200653150?k=6&m=1200653150&s=170667a&w=0&h=gMdtn8F1poANbB-ozsdny2nq01vYY70AeE-p3FjYXnI=" width="30" height="30" alt=""></img>  
        </h4>         
       </Alert>: null}
