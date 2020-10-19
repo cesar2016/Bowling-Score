@@ -1,5 +1,5 @@
 <p align='left'>
-    <img src='http://imgfz.com/i/gG1ABr2.png' </img>
+    <img src='https://i.postimg.cc/Y9bJCkrf/bowling.png' </img>
 </p>
 
 # BOWLING SCORE
