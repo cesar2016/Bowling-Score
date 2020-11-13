@@ -16,11 +16,6 @@
 - Generar Api Rest.
 - LLamadas al Back a travez de axios
 
-El proyecto dura cuatro semanas. El lunes siguiente al terminar el sprint se realiza una demo donde se muestra al TL el progreso de esa semana. La última semana tiene el `demo final` donde se muestra el proyecto a todo el cohorte.
-
-El horario de trabajo sigue siendo de 9AM a 18PM.
-Todos los días a un horario a definir con su TL habrá un STAND UP para revisar las tareas del día, el progreso y si están bloqueados y/o necesitan ayuda.
-
 ## Comenzando `CLONAR EL REPO`
 
 __IMPORTANTE:__ Es necesario contar minimamente con la última versión estable de Node y NPM. Asegurarse de contar con ella para poder instalar correctamente las dependecias necesarias para correr el proyecto.
